@@ -11,15 +11,15 @@ class UserProfileManager(BaseUserManager):
 
     def create_user(self,email,name,password=None):
         if not email:
-            raise ValueError('Users must have an email adress')
+                raise ValueError('Users must have an email adress')
 
-            email = self.normalize_email(email)
-            user = self.model(email=email, name=name)
+        email = self.normalize_email(email)
+        user = self.model(email=email, name=name)
 
-            user.set_password(password)
-            user.save(user=self._db)
+        user.set_password(password)
+        user.save(using=self._db)
 
-            return Users
+        return user
 
     def create_superuser(self,email,name,password):
         user = self.create_user(email, name, password)
@@ -33,7 +33,6 @@ class UserProfileManager(BaseUserManager):
 
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
-
     """Represents a "user profile" inside our system."""
 
     email = models.EmailField(max_length = 255, unique = True)
@@ -58,3 +57,4 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         """"Django uses this when it needs to convert the object to string """
+        return self.email
