@@ -1,4 +1,4 @@
-Django==1.11
+Django==1.11.23
 djangorestframework==3.6.2
 pytz==2019.1
 uWSGI==2.0.15
